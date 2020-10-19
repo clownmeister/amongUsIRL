@@ -1,2 +1,5 @@
 /.env
 /application/package-lock.json
+/application/node_modules/
+/application/vendor/
+/.idea
