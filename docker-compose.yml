@@ -17,9 +17,13 @@ services:
       - app-php:php
     volumes:
       - ./application:/var/www/html
-      - ./config/web/local.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./config/web/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./config/web/nginx.conf:/etc/nginx/nginx.conf:ro
     ports:
       - "${APP_PORT}:${APP_PORT}"
+    environment:
+      - NGINX_HOST=localhost
+      - NGINX_PORT=80
 
   app-php:
     image: ${APP_PHP_IMAGE}
@@ -45,6 +49,8 @@ services:
       - webapp
     depends_on:
       - app-db
+    environment:
+      - ADMINER_DEFAULT_SERVER=db
     ports:
       - "${ADMINER_PORT}:${ADMINER_PORT}"
 
