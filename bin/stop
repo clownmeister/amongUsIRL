@@ -1,0 +1,4 @@
+#!/bin/sh
+echo "\e[1;41mShuting down docker containers \e[0m"
+docker-compose down
+echo ----------------------------------------------------

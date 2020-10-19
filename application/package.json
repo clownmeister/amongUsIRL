@@ -1,0 +1,14 @@
+{
+  "name": "among-us-irl",
+  "version": "1.0.0",
+  "description": "Among us but in real life",
+  "author": "Lushn Blaze @ lucian.blazek@gmail.com",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.1",
+    "socket.io": "^2.3.0"
+  }
+}

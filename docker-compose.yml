@@ -25,11 +25,24 @@ services:
       - NGINX_HOST=localhost
       - NGINX_PORT=80
 
+  app-node:
+    image: ${APP_NODE_IMAGE}
+    container_name: ${CONTAINER_NAME_PREFIX}-node
+    user: ${NODE_USER}
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./:/home/node/app
+    expose:
+      - ${NODE_PORT}
+    command: "npm start"
+
   app-php:
-    image: ${APP_PHP_IMAGE}
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: ${CONTAINER_NAME_PREFIX}-php
-    labels:
-      - traefik.enable=false
     networks:
       - webapp
     depends_on:
@@ -38,6 +51,7 @@ services:
       - app-db:db
     volumes:
       - ./application:/var/www/html/
+#      - ./config/php/php.ini:/etc/php/7.4/cli/php.ini
 
   app-adminer:
     container_name: ${CONTAINER_NAME_PREFIX}-adminer
